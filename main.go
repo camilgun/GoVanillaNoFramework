@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"goandjs.com/noframework/handlers"
 	"goandjs.com/noframework/logger"
 )
 
@@ -20,6 +21,10 @@ func main() {
 
 	logInstance := initializeLogger()
 	defer logInstance.Close()
+
+	movieHandler := handlers.MovieHandler{}
+
+	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
 	http.Handle("/", http.FileServer(http.Dir("public")))
 
 	const addr = "localhost:8080"
