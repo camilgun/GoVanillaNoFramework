@@ -1,3 +1,4 @@
 # Local logs
 movie.log
 tmp/
+.env
