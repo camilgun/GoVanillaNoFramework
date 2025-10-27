@@ -50,13 +50,13 @@ func main() {
 	}
 
 	// Movie handlers Initializer
-	movieHandler := handlers.MovieHandler{
-		Storage: movieRepo,
-		Logger:  logInstance,
-	}
+	movieHandler := handlers.NewMovieHandler(movieRepo, logInstance)
 
 	http.HandleFunc("/api/movies/top", movieHandler.GetTopMovies)
 	http.HandleFunc("/api/movies/random", movieHandler.GetRandomMovies)
+	http.HandleFunc("/api/movies/search", movieHandler.SearchMovies)
+	http.HandleFunc("/api/movies/", movieHandler.GetMovie)
+	http.HandleFunc("/api/genres", movieHandler.GetGenres)
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
 
