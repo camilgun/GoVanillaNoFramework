@@ -1,5 +1,6 @@
 import './components/HomePage.js';
 import './components/AnimatedLoading.js';
+import './components/MovieDetailsPage.js';
 
 window.app = {
   search: (event) => {
