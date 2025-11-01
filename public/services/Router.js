@@ -1,10 +1,19 @@
-import { routes } from "./Routes";
+import { routes } from "./Routes.js";
 
-const Router = {
+export const Router = {
   init: () => {
     window.addEventListener("popstate", () => {
       Router.go(location.pathname, false);
     });
+
+    document.querySelectorAll("a.navlink").forEach(a => {
+      a.addEventListener("click", (event) => {
+        event.preventDefault();
+        const href = a.getAttribute("href");
+        Router.go(href);
+      });
+    });
+
     Router.go(location.pathname + location.search);
   },
   go: (route, addToHistory=true) => {
@@ -35,10 +44,10 @@ const Router = {
       pageElement = document.createElement("h1");
       pageElement.textContent = "Page not found";
     }
-    else {
-      document.querySelector("main").innerHTML = '';
-      document.querySelector("main").appendChild(pageElement);
-    }
+
+    document.querySelector("main").innerHTML = null;
+    document.querySelector("main").appendChild(pageElement);
+
 
   },
 };

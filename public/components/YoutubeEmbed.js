@@ -2,8 +2,9 @@ export class YoutubeEmbed extends HTMLElement {
   static get observedAttributes() {
     return ["data-url"];
   }
-  attributeChangedCallback(prop, value) {
-    if (prop === "data-url") {
+  attributeChangedCallback(prop, oldValue, newValue) {
+
+    if (prop === "data-url" && newValue) {
       const url = this.dataset.url;
 
       const videoId = url.split("v=")[1].split("&")[0];

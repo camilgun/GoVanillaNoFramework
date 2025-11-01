@@ -6,7 +6,7 @@ export class MovieItemComponent extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <a href="#">
+      <a href="/movies/${this.movie.id}">
         <article>
           <img src="${this.movie.poster_url}"
             alt="${this.movie.title} Poster">
@@ -14,6 +14,12 @@ export class MovieItemComponent extends HTMLElement {
         </article>
       </a>
     `;
+
+    const link = this.querySelector('a');
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      app.Router.go(`/movies/${this.movie.id}`);
+    });
   }
 }
 
