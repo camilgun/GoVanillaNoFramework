@@ -1,6 +1,6 @@
 import { API } from "../services/API.js";
 
-class MovieDetailsPage extends HTMLElement {
+export class MovieDetailsPage extends HTMLElement {
   id = null;
   movie = null;
 
