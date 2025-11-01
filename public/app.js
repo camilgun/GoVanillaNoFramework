@@ -1,6 +1,5 @@
-import { API } from './services/API.js';
-
 import './components/HomePage.js';
+import './components/AnimatedLoading.js';
 
 window.app = {
   search: (event) => {
@@ -8,5 +7,4 @@ window.app = {
       const q = document.querySelector("input[type='search']").value;
       console.log("Searching for:", q);
     },
-    api: API,
 };
