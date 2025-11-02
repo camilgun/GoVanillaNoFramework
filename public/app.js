@@ -24,6 +24,6 @@ window.app = {
   search: (event) => {
       event.preventDefault();
       const q = document.querySelector("input[type='search']").value;
-      console.log("Searching for:", q);
+      app.Router.go('movies?q=' + encodeURIComponent(q));
     },
 };
