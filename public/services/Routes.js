@@ -12,7 +12,7 @@ export const routes = [
     component: MovieDetailsPage,
   },
   {
-    path: "movies",
+    path: "/movies",
     component: MoviesPage,
   }
 ];

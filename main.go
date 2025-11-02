@@ -61,6 +61,7 @@ func main() {
 	catchAllClientRoutesHandler := func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "public/index.html")
 	}
+	http.HandleFunc("/movies", catchAllClientRoutesHandler)
 	http.HandleFunc("/movies/", catchAllClientRoutesHandler)
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
