@@ -7,10 +7,17 @@ export class MovieDetailsPage extends HTMLElement {
   async render() {
     try {
       this.movie = await API.getMoviesById(this.id);
-    } catch {
-      console.error("Movie does not exist");
+    }
+    catch {
+      app.showError("Could not load movie details.", true);
       return;
     }
+
+    if (!this.movie) {
+      app.showError("Movie not found.", true);
+      return;
+    }
+
     const template = document.getElementById("template-movie-details");
     const content = template.content.cloneNode(true);
     this.appendChild(content);
