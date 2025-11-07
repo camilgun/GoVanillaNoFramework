@@ -74,6 +74,7 @@ func main() {
 	}
 	http.HandleFunc("/movies", catchAllClientRoutesHandler)
 	http.HandleFunc("/movies/", catchAllClientRoutesHandler)
+	http.HandleFunc("/account/", catchAllClientRoutesHandler)
 
 	http.Handle("/", http.FileServer(http.Dir("public")))
 
