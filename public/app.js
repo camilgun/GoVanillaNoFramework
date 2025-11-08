@@ -4,6 +4,7 @@ import "./components/MovieDetailsPage.js";
 import "./components/YoutubeEmbed.js";
 import { Router } from "./services/Router.js";
 import { API } from "./services/API.js";
+import Store from "./services/Store.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   Router.init();
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.app = {
   Router,
+  Store,
   showError: (message = "There was an error.", goToHome = true) => {
     document.getElementById("alert-modal").showModal();
     document.querySelector("#alert-modal p").textContent = message;
@@ -56,6 +58,7 @@ window.app = {
     else {
       const response = await API.register(name, email, password);
       if (response.success) {
+        app.Store.jwt = response.jwt;
         app.Router.go("/account/");
       }
       else {
@@ -78,6 +81,7 @@ window.app = {
     else {
       const response = await API.login(email, password);
       if (response.success) {
+        app.Store.jwt = response.jwt;
         app.Router.go("/account/");
       }
       else {
