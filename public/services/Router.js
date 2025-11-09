@@ -21,20 +21,20 @@ export const Router = {
       history.pushState(null, "", route);
     }
     let pageElement = null;
+    let needsLogin = false;
     const routPath = route.includes("?") ? route.split("?")[0] : route;
 
-    let needsLogin = false;
-
     for (const r of routes) {
-      needsLogin = r.loggedInOnly === true;
       if (typeof r.path === "string" && r.path === routPath) {
         pageElement = new r.component();
+        needsLogin = r.loggedInOnly === true;
         break;
       }
       else if (r.path instanceof RegExp) {
         const match = routPath.match(r.path);
         if (match) {
           pageElement = new r.component();
+          needsLogin = r.loggedInOnly === true;
           // Pass route params to the component
           pageElement.params = match.slice(1);
           break;
