@@ -23,7 +23,10 @@ export const Router = {
     let pageElement = null;
     const routPath = route.includes("?") ? route.split("?")[0] : route;
 
+    let needsLogin = false;
+
     for (const r of routes) {
+      needsLogin = r.loggedInOnly === true;
       if (typeof r.path === "string" && r.path === routPath) {
         pageElement = new r.component();
         break;
@@ -37,12 +40,18 @@ export const Router = {
           break;
         }
       }
-
     }
 
     if (pageElement === null) {
       pageElement = document.createElement("h1");
       pageElement.textContent = "Page not found";
+    }
+
+    if (pageElement) {
+      if (needsLogin && !app.Store.loggedIn) {
+        app.Router.go("/account/login");
+        return;
+      }
     }
 
     const oldPage = document.querySelector("main").firstElementChild;

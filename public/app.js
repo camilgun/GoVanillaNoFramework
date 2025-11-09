@@ -90,5 +90,9 @@ window.app = {
     }
 
   },
+  logout: () => {
+    app.Store.jwt = null;
+    app.Router.go("/");
+  }
 
 };
